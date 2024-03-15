@@ -83,8 +83,8 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('push', event => {
-  //const {title, menssage} = event.data.json();
-  const data = event.data.json();
-  //self.registration.showNotification( title, {body: menssage }); 
-  self.registration.showNotification( "Recibido", {body: "Ok" }); 
+  const {title, message} = event.data.json();
+  //const data = event.data.json();
+  self.registration.showNotification( title, {body: message }); 
+  //self.registration.showNotification( "Recibido", {body: "Ok" }); 
 });

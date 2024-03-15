@@ -20,17 +20,17 @@ webpush.setVapidDetails(
 );
 
 const subscription = {
-    endpoint: 'https://fcm.googleapis.com/fcm/send/fSR13sDwFBE:APA91bEugXuNBnqTiD7C5Vd8-wemakihl1S6pDCLBqN2a9ozBuGPn0iEo2Viodexw9BBguGVEH3KIfkBN22R-tYGYWOcyYLldoEM7XUuBPlW4nvXIZgrMcHfUy3SE9tbEuGrPgdecLK2',
+    endpoint: 'https://fcm.googleapis.com/fcm/send/fldesb2v8rA:APA91bE_FOKE6CqOUSDarOF3wzxlBF2OnFBg3TsnZe4GHyr0wEy_8y7XwK-GdxGg5GjscUDlHibGqOQhRuwqWCkBPybd5nKHCln6CGhwOG2ovCbxVxW8eRT4kY6SFzwXkqLHiJvfHov-',
     expirationTime: null,
     keys: {
-      p256dh: 'BCgFYe2XY2baqtKu3o9yyLiH7-Ohn0cUZTLXCWJtXeOUoUsU6c0flCbFPWgMfIYH1kKtrTm_yGeg0TSyi-ieDgI',
-      auth: 'Nq-B7dY73QhAnnlHN7Q0pw'
+        p256dh: 'BBAjz7OwGrwB_lMQ_NtX4iPsmBDOq3DzfZFmc6dCgaD57C-2PVubO0_WHYeCKCYTM3vziUY2Pwg1bxzP8o5y6PQ',
+        auth: 'MSltSa7uQcvxwoKaNK8qdQ'
     }
-  }; 
+};
   
 
 app.get('/', (req, res) => {
-    
+    //res.sendStatus(200).json();
     const payload = JSON.stringify(
         {
             title: "Server Notification", 
@@ -47,14 +47,14 @@ app.post('/custom_notification', (req, res) => {
     const payload = JSON.stringify({ title, message });
     webpush.sendNotification(subscription, payload);
     res.send("Todo ok, custom notification enviada");
-})
+});
 
 app.post('/subscription' , (req,res) => {
     const { pushSubscription } = req.body;
     console.log(pushSubscription);
     res.sendStatus(200);
-})
+});
 
 const port = 8000;
 
-app.listen(port, () => console.log("Server listening on port ${port}"));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
