@@ -74,12 +74,17 @@ self.addEventListener('message', (event) => {
 
 // Aquí vamos a poner todo nuestro código custom
 
-const version = "app-V5-Front";
-
 self.addEventListener('install', event => {
-  console.log(`Instalando versión ${version}`)
+  console.log(`Instalando nueva versión `)
 });
 
 self.addEventListener('activate', event => {
-  console.log(`Activada versión ${version}!`)
+  console.log(`Activada nueva versión!`)
+});
+
+self.addEventListener('push', event => {
+  //const {title, menssage} = event.data.json();
+  const data = event.data.json();
+  //self.registration.showNotification( title, {body: menssage }); 
+  self.registration.showNotification( "Recibido", {body: "Ok" }); 
 });
