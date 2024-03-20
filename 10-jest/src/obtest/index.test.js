@@ -1,4 +1,5 @@
-import { sumar, restar, multiplicar, dividir, devuleveEmail, devuelveObjeto, Rectangulo, devuelveArrayNum, devuelveArrayStr, devuelveArrayObj } from './index'
+import { sumar, restar, multiplicar, dividir, devuelveEmail, devuelveObjeto, Rectangulo, devuelveArrayNum, devuelveArrayStr, devuelveArrayObj,
+devuelveTrue, devuelveFalse, devuelveNull, devuelveUndefined } from './index'
 
 // Aqui vamos a crear nuestros casos de prueba
 // describe, test(it)
@@ -42,9 +43,33 @@ describe('Assertions basicos en los numeros', () => {
     })
 })
 
+describe('Assertions basicos con boleanos', () => {
+    test('Probar que algo es true', () => { 
+        const r = devuelveTrue();
+        expect(r).toBeTruthy();
+     })
+    test('Probar que algo es false', () => { 
+        const r = devuelveFalse();
+        expect(r).toBeFalsy();
+     })
+    test('Probar que algo es null', () => { 
+        const r = devuelveNull();
+        expect(r).toBeNull();
+     })
+    test('Probar que algo es defined', () => { 
+        const r = 5;
+        expect(r).toBeDefined();
+     })
+    test('Probar que algo es undefined', () => { 
+        const r = devuelveUndefined();
+        expect(r).toBeUndefined();
+     })
+})
+
+
 describe('Assertions basicos en los strings', () => {
     test('El cambo debe tener un email', () => {
-        const email = devuleveEmail();
+        const email = devuelveEmail();
         expect(email).toMatch(/[a-zA-Z].[a-zA-Z]\.com/);
     })
 })
@@ -86,3 +111,23 @@ describe('Assertions basicos en arrays', () => {
       })
 })
 
+describe('Assertions con funciones mock', () => {
+  test('Primera prueba con mock', () => {
+    const mockFn = jest.fn(() => 5);
+    const res = mockFn();
+    expect(mockFn).toHaveBeenCalled();
+  })
+
+  test('Que la funcion haya sido llamado n veces', () => {
+    const mockFn = jest.fn(() => 5);
+    const res = mockFn();
+    const res2 = mockFn();
+    const res3 = mockFn();
+    expect(mockFn).toHaveBeenCalledTimes(3);
+  })
+  test('Que la funcion haya sido llamado con un parametro', () => {
+    const mockFn = jest.fn(() => 5);
+    const res = mockFn('prueba');
+    expect(mockFn).toHaveBeenCalledWith('prueba');
+  })
+})

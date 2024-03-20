@@ -9,7 +9,7 @@
  export const multiplicar = (a,b) => (a * b);
  export const dividir = (a,b) => (a / b);
 
- export const devuleveEmail = () => 'gorka@gorka.com';
+ export const devuelveEmail = () => 'gorka@gorka.com';
 
  export const devuelveObjeto = () => {
     return {
@@ -21,6 +21,11 @@
  export const devuelveArrayNum  = () => [1,2,3,4,5]
  export const devuelveArrayObj  = () => [{ id: 1 },{ id: 2 },{ id: 3 },{ id: 4 },{ id: 5 }]
  export const devuelveArrayStr  = () => ['leche','huevos','jamón','cereales','yogures']
+
+ export const devuelveTrue = () => true;
+ export const devuelveFalse = () => false;
+ export const devuelveNull = () => null;
+ export const devuelveUndefined = () => undefined;
 
 
  export class Rectangulo {
