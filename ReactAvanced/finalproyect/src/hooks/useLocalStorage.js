@@ -7,7 +7,9 @@ const useLocalStorage = (key, defaultValue = null) => {
             if (item !== null) {
                 return JSON.parse(item);
             }
+
             return defaultValue;
+
         } catch (error) {
             return defaultValue;
         }
@@ -15,9 +17,11 @@ const useLocalStorage = (key, defaultValue = null) => {
 
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(value));
+
     }, [key, value]);
 
     return [value, setValue];
+
 };
 
 export default useLocalStorage;
