@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './App.css';
 
-const str: string = 'Hola Mundo';
+const str: string = 'Documento React';
 const num: number = 6;
 
 type AppProps = {

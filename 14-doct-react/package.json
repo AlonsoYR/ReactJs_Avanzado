@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/cli": "^7.24.1",
     "@babel/core": "^7.24.3",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-flow": "^7.24.1",
     "babel-plugin-syntax-hermes-parser": "^0.20.1",
     "flow-bin": "^0.231.0"
