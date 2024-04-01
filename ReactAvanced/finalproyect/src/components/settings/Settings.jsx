@@ -1,36 +1,35 @@
-import React from 'react'
-import useLocalStorage from '../../hooks/useLocalStorage'
+import React from "react";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-
-const defaultConfig ={
-    theme: 'dark',
-    lang: 'es'
+const defaultConfig = {
+  theme: "dark",
+  lang: "es",
 };
 
-export default function Settings () {
+export default function Settings({ toggleDark }) {
+  const [config, setConfig] = useLocalStorage("config", defaultConfig);
 
-    const [config, setConfig] = useLocalStorage('config', defaultConfig);
+  /**
+   * Función para intercambiar light <-> dark tanto en localStorage como en estado de la aplicación
+   * @param {*} event - Evento de click proveniente de React
+   */
 
-    const handleClick = (event) =>{
-        event.preventDefault();
-        setConfig((oldConfig) => (
-            {
-            ...oldConfig,
-            theme: 'light',
-        }),
-        );
-    };
+  const toggleMode = (event) => {
+    event.preventDefault();
+    setConfig((oldConfig) => ({
+      ...oldConfig,
+      theme: oldConfig.theme === "light" ? "dark" : "light",
+    }));
+    toggleDark();
+  };
 
-    return (
-      <div>
-        <h1>APP SETTINGS</h1>
-        <p>Actual Config:{config.theme}</p>
-        <p>Actual Config:{config.lang}</p>
-        <button  type="button" onClick={handleClick}>
-            Save New Settings
-        </button>
-      </div>
-    )
-
-
+  return (
+    <div>
+      <h1>APP SETTINGS</h1>
+      <p>Actual Config: {config.theme}</p>
+      <button className="btn" type="button" onClick={toggleMode}>
+        Toggle DarkMode
+      </button>
+    </div>
+  );
 }

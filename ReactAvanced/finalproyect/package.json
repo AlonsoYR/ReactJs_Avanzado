@@ -14,7 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --watchAll",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "document": "documentation build src/** -f html --github -o docs"
   },
   "eslintConfig": {
     "extends": [
