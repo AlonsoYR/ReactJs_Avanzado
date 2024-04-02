@@ -29,7 +29,7 @@ const App = () => {
     };
 
     return (
-        <div className={`App ${dark ? "dark" : ""}`}>
+        <div className={`h-screen p-4 flex flex-col ${dark ? "dark" : ""}`}>
             <TaskList />
             <hr style={{ marginTop: 20, marginBottom: 20 }} />
             <Settings toggleDark={toggleDark} />

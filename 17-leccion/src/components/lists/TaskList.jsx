@@ -16,8 +16,10 @@ const TaskList = () => {
    */
 
   const addNewTask = () => {
-    setTasklist([...tasklist, { task: newTask, completed: false}]);
-    setNewTask("");
+    if(newTask === "") return;
+      setTasklist([...tasklist, { task: newTask, completed: false}]);
+      setNewTask("");
+      return true;
   };
 
   /**
@@ -64,16 +66,19 @@ const TaskList = () => {
 
   return (
     <>
-      <h1>Task List</h1>
-      <div>
-        <input className="input"
+      <h1 className="text-3xl text-sky-700 font-semibold">Task List</h1>
+      <div className="my-4">
+        <input className="shadow py-1 px-2 rounded-lg outline-none transition-all 
+          duration-300 focus:ring-2 mr-2"
           value={newTask}
           onKeyDown={insertNewItemOnEnterKey}
           onChange={editNewItem}
           placeholder="New Task"
           type="text"
         />
-        <button className= "btn" onClick={addNewTask}>Create Task</button>
+        <button className= "py-1 px-2 shadow rounded bg-sky-300 hover:bg-sky-400 hover:text-white transition"
+         onClick={addNewTask}>
+          Create Task</button>
       </div>
       {isTasksEmpty() ? (
         <p>Task List is Empty</p>
@@ -88,7 +93,9 @@ const TaskList = () => {
                 checked={item.completed}
                 onChange={ () => {}}
               />
-              {item.task}
+              <span className={`ml-2 text-gray-800 text-sm italic ${
+                item.completed && "line-through"
+              }`}>{item.task}</span>
             </li>
           ))}
         </ul>
