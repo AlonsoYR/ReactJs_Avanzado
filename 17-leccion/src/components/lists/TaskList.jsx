@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 /**
  * Componente que gestiona la lista de tareas
@@ -6,9 +7,10 @@ import React, { useState } from "react";
  * @returns {React.Component}
  */
 
-const TaskList = () => {
+const TaskList = ({ showSettings, setshowSettings }) => {
   const [newTask, setNewTask] = useState("");
   const [tasklist, setTasklist] = useState([]);
+
 
   /**
    * Añade una nueva tarea a la lista
@@ -66,17 +68,22 @@ const TaskList = () => {
 
   return (
     <>
-      <h1 className="text-3xl text-sky-700 font-semibold">Task List</h1>
+    <header className="flex justify-center m-3">
+      <motion.button whileHover={{ scale: 1.2}} whileTap={{ scale: 0.9}} className="btn" onClick={() => setshowSettings(!showSettings)}>
+        {!showSettings ? "Show Settings" : "Hide Settings"}
+      </motion.button>
+    </header>
+    <h1 className="text-3xl text-sky-700 font-semibold dark:text-sky-300">Task List</h1>
       <div className="my-4">
         <input className="shadow py-1 px-2 rounded-lg outline-none transition-all 
-          duration-300 focus:ring-2 mr-2"
+          duration-300 focus:ring-2 mr-2 dark:bg-slate-700"
           value={newTask}
           onKeyDown={insertNewItemOnEnterKey}
           onChange={editNewItem}
           placeholder="New Task"
           type="text"
         />
-        <button className= "py-1 px-2 shadow rounded bg-sky-300 hover:bg-sky-400 hover:text-white transition"
+        <button className= "btn"
          onClick={addNewTask}>
           Create Task</button>
       </div>
@@ -93,7 +100,7 @@ const TaskList = () => {
                 checked={item.completed}
                 onChange={ () => {}}
               />
-              <span className={`ml-2 text-gray-800 text-sm italic ${
+              <span className={`ml-2 text-gray-800 dark:text-gray-100 text-sm italic ${
                 item.completed && "line-through"
               }`}>{item.task}</span>
             </li>
