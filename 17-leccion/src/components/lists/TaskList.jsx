@@ -92,18 +92,22 @@ const TaskList = ({ showSettings, setshowSettings }) => {
       ) : (
         <ul>
           {tasklist.map((item, index) => (
-            <li key={index}>
-              <input
-                type="checkbox"
-                //onClick={() => removeItem(index)}
-                onClick={() => toggleCompleteItem(index)}
-                checked={item.completed}
-                onChange={ () => {}}
-              />
-              <span className={`ml-2 text-gray-800 dark:text-gray-100 text-sm italic ${
-                item.completed && "line-through"
-              }`}>{item.task}</span>
-            </li>
+            <motion.li 
+              initial={{ x:"100vw" }} animate={{ x:0 }} key={index}>
+              <label>
+                <input
+                  type="checkbox"
+                  //onClick={() => removeItem(index)}
+                  onClick={() => toggleCompleteItem(index)}
+                  checked={item.completed}
+                  onChange={ () => {}}
+                />
+                <span className={`ml-2 text-gray-800 dark:text-gray-100 text-sm italic ${
+                  item.completed && "line-through"
+                }`}>{item.task}
+                </span>
+              </label>
+            </motion.li>
           ))}
         </ul>
       )}
