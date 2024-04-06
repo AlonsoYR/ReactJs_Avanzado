@@ -22,6 +22,7 @@ function App() {
         {route === "login" && <Login />}
         {route === "register" && <Register/>}
         {user && <p>Usuario Logueado: {user.email}</p>}
+        
       </main>
     </AppContext.Provider>
   );
