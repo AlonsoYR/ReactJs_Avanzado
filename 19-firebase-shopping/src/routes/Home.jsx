@@ -3,7 +3,8 @@ import React from 'react'
 const Home = () => {
   return (
     <div className='Home'>
-        Bienvenidos a FireShopping
+       <p>Bienvenidos a FireShopping</p>
+       
     </div>
   )
 }

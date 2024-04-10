@@ -24,8 +24,8 @@ getToken(messaging, { vapidKey }).then((currentToken) => {
   if (currentToken) {
     // Send the token to your server and update the UI if necessary
     // ...
-    console.log('currentToken', currentToken);
-    //sendTokenToServer(currentToken);
+    //console.log('currentToken', currentToken);
+    sendTokenToServer(currentToken);
   } else {
     // Show permission request UI
     console.log('No registration token available. Request permission to generate one.');
@@ -39,7 +39,6 @@ getToken(messaging, { vapidKey }).then((currentToken) => {
 const sendTokenToServer = token => {
   if (localStorage.getItem('tokenSentToServer')) return;
 
-  console.log('Ha almacenado el token');
   localStorage.setItem('tokenSentToServer', token);
 }
 
