@@ -2,17 +2,10 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-import {getMessaging, getToken} from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
+import { getFirestore } from "firebase/firestore";
 
 const vapidKey = "BIWrIdGxrfimfaZi0T5w3vSbBiQHItL893SVhNQp_aAXO3kRaHeIvYy-sQffM332JEzlXPIHa5hns50bl3ZxngI"
-
-function requestPermission() {
-  console.log('Requesting permission...');
-  Notification.requestPermission().then((permission) => {
-    if (permission === 'granted') {
-      console.log('Notification permission granted.');
-    }});}
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,14 +19,13 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-requestPermission();
-const messaging = getMessaging();
-getToken(messaging, {vapidKey})
-.then((currentToken) => {
+export const messaging = getMessaging();
+getToken(messaging, { vapidKey }).then((currentToken) => {
   if (currentToken) {
     // Send the token to your server and update the UI if necessary
     // ...
-    console.log("currentToken", currentToken);
+    console.log('currentToken', currentToken);
+    //sendTokenToServer(currentToken);
   } else {
     // Show permission request UI
     console.log('No registration token available. Request permission to generate one.');
@@ -43,3 +35,12 @@ getToken(messaging, {vapidKey})
   console.log('An error occurred while retrieving token. ', err);
   // ...
 });
+
+const sendTokenToServer = token => {
+  if (localStorage.getItem('tokenSentToServer')) return;
+
+  console.log('Ha almacenado el token');
+  localStorage.setItem('tokenSentToServer', token);
+}
+
+export const db = getFirestore(app);
