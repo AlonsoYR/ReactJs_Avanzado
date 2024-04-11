@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addNewTask, getTasks } from '../firebase/taskController';
+import { addNewTask, deleteTask, getTasks, updateTask } from '../firebase/taskController';
 
 const task = {
     title: 'Titulo',
@@ -11,17 +11,41 @@ const TaskList = () => {
     // const [description, setDescription] = useState("");
     const [task, setTask] = useState({ title: "", description:"" });
     const [tasks, setTasks] = useState([]);
+    const [mode, setMode] = useState('add');
 
     const createNewTask = async () => {
-        console.log(task);
         await addNewTask(task);
+        setTask({title:"", description:""});
+        initializeTasks();
+    };
+
+    const updateExistingTask = async() => {
+        await updateTask(task);
+        setTask({title:"", description:""});
+        initializeTasks();
+        setMode("add");
     }
 
-    useEffect(() => {
+    const initializeTasks = () => {
         getTasks()
         .then(t => setTasks([...t]))
         .catch((e) => console.error(e));
-    }, [])
+    };
+
+    const editTask = (id) => {
+        setMode('update');
+        const taskToEdit = tasks.find(t => t.id === id);
+        setTask({...taskToEdit});
+    };
+
+    const deleteExistTask = (id) => {
+        deleteTask(id);
+        initializeTasks();
+    }
+
+    useEffect(() => {
+        initializeTasks();
+    }, []);
 
   return (
     <div>
@@ -45,12 +69,12 @@ const TaskList = () => {
             />
             <button 
                 className='bg-sky-400 text-white rounded shadow py-1 hover:bg-sky-500 transition font-semibold'
-                onClick={createNewTask}
+                onClick={() => mode === 'add' ? createNewTask() : updateExistingTask()}
             >
-                    Añadir
+                {mode === 'add' ? 'Añadir' : 'Actualizar'}   
             </button>
-            <button onClick={getTasks}>Tareas</button>
-            <div>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4'>
                 {tasks.map((task) => (
                     <div
                         key={task.id} 
@@ -59,6 +83,16 @@ const TaskList = () => {
                         <h1 className='font-semibold'>{task.title}</h1>
                         <div className='border-t border-sky-300'/>
                         <p>{task.description}</p>
+                        <div className='flex justify-between'>
+                            <button 
+                                className='bg-sky-400 text-white py-1 px-2 rounded'
+                                onClick={() => editTask(task.id)}
+                            >Editar</button>
+                            <button 
+                                className='bg-red-600 text-white py-1 px-2 rounded'
+                                onClick={() => window.confirm("¿Seguro deseas eliminar esta tarea?") && deleteExistTask(task.id)}
+                            >Eliminar</button>
+                        </div>
                     </div>
                 ))}
             </div>

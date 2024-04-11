@@ -1,6 +1,6 @@
 //Fichero donde almacena toda la lógica de DB(CRUD)
 import { db } from "./index";
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, getDocs, doc, deleteDoc } from "firebase/firestore"; 
 
 
 export const addNewTask = async task => {
@@ -19,4 +19,15 @@ export const getTasks = async () => {
     })
     //console.log(tasks);
     return tasks;
+};
+
+export const updateTask = async (task) => {
+    await setDoc(doc(db, 'tasks', task.id), {
+        title: task.title,
+        description: task.description
+    });
+}
+
+export const deleteTask = async (id) => {
+    await deleteDoc(doc(db, 'tasks', id))
 }
