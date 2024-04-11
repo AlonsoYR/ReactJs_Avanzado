@@ -5,10 +5,10 @@ import Home from './routes/Home';
 import Login from './routes/Login';
 import Register from './routes/Register';
 import Shopping from './routes/Shopping';
-import { LiaGripfire } from "react-icons/lia";
 import { Toaster, toast } from 'react-hot-toast';
 import { onMessage } from 'firebase/messaging';
 import Footer from './components/Footer';
+import TaskList from './components/TaskList';
 
 export const AppContext = createContext(null);
 onMessage(messaging, payload => {
@@ -35,6 +35,7 @@ function App() {
           {route === "login" && <Login />}
           {route === "register" && <Register/>}
           {route === "shopping" && <Shopping/>}
+          {route === "tasklist" && <TaskList/>}
           {user && <p>Usuario Logueado: {user.email}</p>}
         </main>
         <Footer/>
