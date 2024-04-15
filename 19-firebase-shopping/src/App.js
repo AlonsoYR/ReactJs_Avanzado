@@ -39,7 +39,6 @@ function App() {
           {user && <p>Usuario Logueado: {user.email}</p>}
         </main>
         <Footer/>
-
       </div>
     </AppContext.Provider>
   );
