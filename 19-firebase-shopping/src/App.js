@@ -36,12 +36,15 @@ function App() {
           {route === "register" && <Register/>}
           {route === "shopping" && <Shopping/>}
           {route === "tasklist" && <TaskList/>}
-          {user && <p>Usuario Logueado: {user.email}</p>}
+          
         </main>
         <Footer/>
+        
       </div>
     </AppContext.Provider>
   );
 }
+
+//{user && <p>Usuario Logueado: {user.email}</p>}
 
 export default App;
