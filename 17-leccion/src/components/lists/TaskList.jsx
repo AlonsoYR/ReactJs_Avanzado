@@ -73,7 +73,7 @@ const TaskList = ({ showSettings, setshowSettings }) => {
         {!showSettings ? "Show Settings" : "Hide Settings"}
       </motion.button>
     </header>
-    <h1 className="text-3xl text-sky-700 font-semibold dark:text-sky-300">Task List</h1>
+    <h1 className="text-3xl text-sky-700 font-semibold dark:text-sky-300">Task List - hosted on: Firebase</h1>
       <div className="my-4">
         <input className="shadow py-1 px-2 rounded-lg outline-none transition-all 
           duration-300 focus:ring-2 mr-2 dark:bg-slate-700"
