@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { addTask, getTasks, toggleComplete } from "../../firebase/tasksController";
 
 /**
  * Componente que gestiona la lista de tareas
@@ -11,6 +12,11 @@ const TaskList = ({ showSettings, setshowSettings }) => {
   const [newTask, setNewTask] = useState("");
   const [tasklist, setTasklist] = useState([]);
 
+  useEffect(() => {
+    getTasks()
+    .then((tasks) => setTasklist([...tasks]))
+    .catch((e) => console.error(e));
+  }, [])
 
   /**
    * Añade una nueva tarea a la lista
@@ -19,9 +25,13 @@ const TaskList = ({ showSettings, setshowSettings }) => {
 
   const addNewTask = () => {
     if(newTask === "") return;
-      setTasklist([...tasklist, { task: newTask, completed: false}]);
-      setNewTask("");
-      return true;
+    const task = { task: newTask, completed: false};
+    addTask(task)
+      .then( () => {
+        return setTasklist([...tasklist, task]);
+      })
+      .catch(e => console.error(e))
+      .finally(() => setNewTask(""));
   };
 
   /**
@@ -54,9 +64,17 @@ const TaskList = ({ showSettings, setshowSettings }) => {
    */
 
   const toggleCompleteItem = (index) => {
-    let newTaskList = tasklist;
-    newTaskList[index].completed = !newTaskList[index].completed;
-    setTasklist([...newTaskList]);
+    // let newTaskList = tasklist;
+    // newTaskList[index].completed = !newTaskList[index].completed;
+    // setTasklist([...newTaskList]);
+    let task = tasklist.find(t => t.id === index);
+    toggleComplete(task)
+      .then( async () => {
+        const newTaskList = await getTasks();
+        return setTasklist([...newTaskList,
+        ]);
+      })
+      .catch(e => console.error(e))
   }
 
   /**
@@ -94,11 +112,11 @@ const TaskList = ({ showSettings, setshowSettings }) => {
           {tasklist.map((item, index) => (
             <motion.li 
               initial={{ x:"100vw" }} animate={{ x:0 }} key={index}>
-              <label>
+              <label className="cursor-pointer">
                 <input
                   type="checkbox"
                   //onClick={() => removeItem(index)}
-                  onClick={() => toggleCompleteItem(index)}
+                  onClick={() => toggleCompleteItem(item.id)}
                   checked={item.completed}
                   onChange={ () => {}}
                 />
