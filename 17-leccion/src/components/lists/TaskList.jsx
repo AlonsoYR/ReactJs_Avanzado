@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { addTask, getTasks, toggleComplete } from "../../firebase/tasksController";
+import { addTask, getTasks, toggleComplete} from "../../firebase/tasksController";
 
 /**
  * Componente que gestiona la lista de tareas
