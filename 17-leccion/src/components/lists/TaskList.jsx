@@ -101,7 +101,7 @@ const TaskList = ({ showSettings, setshowSettings }) => {
           placeholder="New Task"
           type="text"
         />
-        <button className= "btn"
+        <button className= "btn btn-add"
          onClick={addNewTask}>
           Create Task</button>
       </div>
